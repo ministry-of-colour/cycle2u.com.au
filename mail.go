@@ -5,22 +5,15 @@ import (
 	"github.com/steveoc64/gomail"
 )
 
-func initMail(cfg configMap, log *logrus.Logger) {
-	m, ok := cfg["mail"]
-	if !ok {
-		return
+func sendMail(subject, msg string, cfg *configData, log *logrus.Logger) error {
+	if cfg.Mail.Server == "" {
+		log.Info("No mail server configured")
+		return nil
 	}
-	mon, ok := cfg["monitor"]
-	if !ok {
-		return
+	if cfg.Monitor.Email == "" {
+		log.Info("No monitor address configured")
+		return nil
 	}
-
-	switch m.(type) {
-	case configMap:
-		mm := m.(configMap)
-		monm := mon.(configMap)
-		log.WithField("monitor", monm["email"]).Info("Sending email on boot")
-		mailer := gomail.New(mm["server"].(string), mm["username"].(string), mm["password"].(string))
-		mailer.Send(mm["from"].(string), monm["email"].(string), "Cycle2U App Startup", "booting ...")
-	}
+	mailer := gomail.New(cfg.Mail.Server, cfg.Mail.Username, cfg.Mail.Password)
+	return mailer.Send(cfg.Mail.From, cfg.Monitor.Email, subject, msg)
 }

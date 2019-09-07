@@ -1,19 +1,19 @@
 package main
+//go:generate rice embed-go
 
 import (
 	"fmt"
+	"github.com/steveoc64/memdebug"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/sirupsen/logrus"
-	"github.com/steveoc64/gomail"
 )
 
 func main() {
+	memdebug.GCMode(false)
 	log := logrus.New()
-	cfg, err := initConfig()
+	cfg, err := initConfig(log)
 	if err != nil {
 		panic(fmt.Errorf("Opening config: %s\n", err.Error()))
 	}
-	initMail(cfg, log)
-	spew.Dump(cfg)
+	runWeb(cfg, log)
 }
