@@ -1,0 +1,224 @@
+
+body, html{
+	background-image: url('images/cycling_background.jpg');
+	background-repeat: no-repeat;
+	margin: 0px 0px 0px 0px;
+	min-height:100%;
+	background-color: black;
+}
+img{border:0;}
+
+p{
+	width: 460px;
+}
+h2, h4{
+	font-family: tahoma;
+}
+
+#sitecontainer{
+	position: absolute;
+	width:1024px;
+	min-height: 100%;
+	border: 1px solid black;
+	top: 0px;
+	left: 50%;
+	margin-left: -512px;
+	background-image: url('images/background.jpg');
+	background-repeat: no-repeat;
+}
+#navigation{
+	position: absolute;
+	margin: 140px 20px 0px 400px;	
+}
+#navigation a:link{
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+}
+#navigation a:visited{
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+}
+#navigation a:hover{
+	color: #31439C;
+	text-decoration: none;
+	font-weight: bold;
+}
+#menu li{
+	display: inline;
+	padding-left: 15px;
+	font-family: Lucida Sans Unicode;
+	font-size: 14px;
+}
+#heroline{
+	position: absolute;
+	margin: 230px 0px 0px 112px;
+}
+#bikehome{
+	float: right;
+}
+#mechanicbike{
+	position: absolute;
+	margin: 230px 0px 0px 610px;
+}
+#booknowon{
+	position: absolute;
+	float: left;
+	bottom: 0;
+	left: 0;
+}
+#booknow{
+	position: absolute;
+	float: left;
+	bottom: 0;
+	left: 0;
+}
+#booknow:hover{
+	opacity: 0;
+}
+#phone{
+	margin: 40px 0px 0px 120px;
+}
+#logos{
+	position: absolute;
+	width: 823px;
+	height: 78px;
+	margin: 574px 0px 0px 112px;
+}
+#indexcontent{
+	position: absolute;
+	width: 823px;
+	height: 290px;
+	background-color: #F5F5F5;
+	margin: 284px 0px 0px 112px;
+	font-family: Lucida Sans Unicode;
+	font-size: 14px;
+	padding-left:5px;
+}
+#servicingcontent{
+	position: absolute;
+	width: 823px;
+	height: 1005px;
+	background-color: #F5F5F5;
+	margin: 284px 0px 0px 112px;
+	font-family: Lucida Sans Unicode;
+	font-size: 14px;
+	padding-left:5px;
+}
+#aboutcontent{
+	position: absolute;
+	width: 823px;
+	height: 700px;
+	background-color: #F5F5F5;
+	margin: 284px 0px 0px 112px;
+	font-family: Lucida Sans Unicode;
+	font-size: 14px;
+	padding-left:5px;
+}
+#contactcontent{
+	position: absolute;
+	width: 823px;
+	height: 1286px;
+	background-color: #F5F5F5;
+	margin: 284px 0px 0px 112px;
+	font-family: Lucida Sans Unicode;
+	font-size: 14px;
+	padding-left:5px;
+}
+#contactform{
+	position: absolute;
+	width: 450px;
+	height:1030px;
+	border: 1px solid black;
+	background-color: #BDC5EA;
+	margin: 20px 0px 0px 20px;
+}
+#pagetitle{
+	position: absolute;
+	margin: 200px 0px 0px 112px;
+	font-family: Lucida Sans Unicode;
+	font-size: 18px;
+	color: #31439C;
+}
+#pricingmenu{
+	width: 350px;
+	height: 430px;
+	border: 1px solid black;
+	background-color: #BDC5EA;
+	margin: 0px 0px 0px 50px;
+}
+#pricingmenutitle{
+	width: 350px;
+	height: 50px:	
+}
+#price{
+	text-indent: 40px;
+	font-size: 20px;
+	font-family: arial;
+}
+#lprice{
+    font-size: 50px;
+	font-family: arial;
+}
+#aboutfooter{
+	position: relative;
+	width: 823px;
+	height: 78px;
+	margin: 990px 0px 0px 112px;
+}
+#servicingfooter{
+	position: relative;
+	width: 823px;
+	height: 78px;
+	margin: 1290px 0px 0px 112px;
+}
+#contactfooter{
+	position: relative;
+	width: 823px;
+	height: 78px;
+	margin: 1570px 0px 0px 112px;
+}
+label {
+    display:block;
+    margin-top:20px;
+    letter-spacing:1px;
+}
+form {
+    margin:0 auto;
+    width:400px;
+}
+input, textarea {
+	width:370px;
+	height:15px;
+	background:#efefef;
+	border:1px solid #dedede;
+	padding:10px;
+	margin-top:3px;
+	font-family: arial;
+	font-size:0.9em;
+	color:#464646;
+	border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+}
+textarea{
+	height: 100px;
+}
+#submit {
+    width:80px;
+    height:38px;
+    background:url('images/submit.jpg');
+    text-indent:-9999px;
+    border:none;
+    margin-top:20px;
+    cursor:pointer;
+}
+
+	#submit:hover {
+	    opacity:0.9;
+	}
+
+
+
+
