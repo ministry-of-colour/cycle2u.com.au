@@ -3,10 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/sirupsen/logrus"
 	"net/url"
 	"strconv"
 	"time"
+
+	"github.com/sirupsen/logrus"
 
 	"github.com/boltdb/bolt"
 )
@@ -88,7 +89,10 @@ func (h *WebHandler) newBooking(booking Booking) {
 		booking.Message,
 		id,
 	)
-	h.mailer.Send(h.cfg.Mail.From, booking.Email, "Cycle2U Booking Confirmation", userMail, nil)
+	err = h.mailer.Send(h.cfg.Mail.From, booking.Email, "Cycle2U Booking Confirmation", userMail, nil)
+	if err != nil {
+		h.log.WithError(err).Error("Mailing customer")
+	}
 
 	// Generate emails to the service reps
 	svcMail := fmt.Sprintf(`
@@ -130,7 +134,7 @@ func (h *WebHandler) newBooking(booking Booking) {
 		h.cfg.Mail.BCC,
 	)
 	if err != nil {
-		println("error", err.Error())
+		h.log.WithError(err).Error("Mailing service rep")
 	}
 
 	// Generate an SMS to the prime service rep
@@ -144,9 +148,10 @@ func (h *WebHandler) newBooking(booking Booking) {
 	if len(smsText) > 160 {
 		smsText = smsText[:160]
 	}
+
 	rsp, err := h.sms.Send(smsText)
 	if err != nil {
-		println("error", err.Error())
+		h.log.WithError(err).Error("Sending SMS")
 	}
-	println("Response:", rsp)
+	h.log.WithField("smsref", rsp).Info("SMS Response")
 }

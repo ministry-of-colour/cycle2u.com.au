@@ -81,13 +81,16 @@ func (h *WebHandler) bookings(w http.ResponseWriter, r *http.Request) {
 	memdebug.Print(t1, r.Method, r.RequestURI)
 	switch r.Method {
 	case "GET":
-		filename := r.RequestURI
-		if filename == "/" {
-			filename = "/index.html"
-		}
-		b, _ := h.assets.Bytes(filename[1:])
-		w.Write(b)
-		h.log.WithField("uri", filename).Print("GET")
+		// so we never actually getting into here
+		/*
+			filename := r.RequestURI
+			if filename == "/" {
+				filename = "/index.html"
+			}
+			b, _ := h.assets.Bytes(filename[1:])
+			w.Write(b)
+			h.log.WithField("uri", filename).Print("GET")
+		*/
 		return
 	case "POST":
 		memdebug.Print(time.Now(), "Posting a booking")
