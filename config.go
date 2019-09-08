@@ -13,6 +13,7 @@ type configData struct {
 	Port    int
 	Address string
 	Name    string
+	DBPath  string
 	Mail    mailConfig
 	Monitor monitorConfig
 	SMS     smsConfig

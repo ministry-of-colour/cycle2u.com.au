@@ -25,7 +25,7 @@ type WebHandler struct {
 }
 
 func NewWebHandler(cfg *configData, log *logrus.Logger) *WebHandler {
-	db, err := bolt.Open("/var/db/cycle2u.com.au.db", 0600, nil)
+	db, err := bolt.Open(cfg.DBPath, 0600, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
