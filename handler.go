@@ -78,6 +78,7 @@ func getIPAdress(r *http.Request) string {
 
 func (h *WebHandler) bookings(w http.ResponseWriter, r *http.Request) {
 	t1 := time.Now()
+	id := 0
 	switch r.Method {
 	case "GET":
 		// so we never actually getting into here
@@ -101,7 +102,7 @@ func (h *WebHandler) bookings(w http.ResponseWriter, r *http.Request) {
 		w.Write(b)
 
 		ip := getIPAdress(r)
-		id := h.newBooking(Booking{
+		id = h.newBooking(Booking{
 			IP:        ip,
 			Name:      r.FormValue("name"),
 			Bike:      r.FormValue("bike"),
@@ -113,5 +114,5 @@ func (h *WebHandler) bookings(w http.ResponseWriter, r *http.Request) {
 			Date:      time.Now(),
 		})
 	}
-	memdebug.Print(t1, r.Method, r.RequestURI)
+	memdebug.Print(t1, r.Method, r.RequestURI, id)
 }
