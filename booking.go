@@ -110,12 +110,15 @@ func (h *WebHandler) newBooking(booking Booking) {
 		time.Now().Format(time.RFC850),
 		h.cfg.Name,
 	)
-	h.mailer.Send(h.cfg.Mail.From,
+	err = h.mailer.Send(h.cfg.Mail.From,
 		h.cfg.Mail.Email,
 		fmt.Sprintf("Cycle2U Booking - %s @%s <%s>", booking.Bike, booking.Name, booking.Email),
 		svcMail,
 		h.cfg.Mail.BCC,
 	)
+	if err != nil {
+		println("error", err.Error())
+	}
 
 	// Generate an SMS to the prime service rep
 	smsText := fmt.Sprintf("#2019%04d\n%s\nPh: %s\n\n%s\n\n%s\n---\n%s",
