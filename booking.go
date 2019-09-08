@@ -19,6 +19,7 @@ type Booking struct {
 	Telephone string
 	Address   string
 	Message   string
+	Date      time.Time
 }
 
 func (h *WebHandler) newBooking(booking Booking) {

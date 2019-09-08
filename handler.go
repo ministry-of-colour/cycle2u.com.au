@@ -83,6 +83,7 @@ func (h *WebHandler) bookings(w http.ResponseWriter, r *http.Request) {
 			Telephone: r.FormValue("telephone"),
 			Address:   r.FormValue("address"),
 			Message:   r.FormValue("message"),
+			Date:      time.Now(),
 		})
 
 		b, _ := h.assets.Bytes("thanks.html")
