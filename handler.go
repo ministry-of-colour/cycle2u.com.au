@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/boltdb/bolt"
+	"net"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/steveoc64/gomail"
@@ -55,6 +57,25 @@ func (h *WebHandler) Run() {
 	h.log.Fatal(http.ListenAndServe(addr, nil))
 }
 
+func getIPAdress(r *http.Request) string {
+	for _, h := range []string{"X-Forwarded-For", "X-Real-Ip"} {
+		addresses := strings.Split(r.Header.Get(h), ",")
+		// march from right to left until we get a public address
+		// that will be the address right before our proxy.
+		for i := len(addresses) - 1; i >= 0; i-- {
+			ip := strings.TrimSpace(addresses[i])
+			// header can contain spaces too, strip those out.
+			realIP := net.ParseIP(ip)
+			if !realIP.IsGlobalUnicast() {
+				// bad address, go to next
+				continue
+			}
+			return ip
+		}
+	}
+	return ""
+}
+
 func (h *WebHandler) bookings(w http.ResponseWriter, r *http.Request) {
 	t1 := time.Now()
 	memdebug.Print(t1, r.Method, r.RequestURI)
@@ -66,6 +87,7 @@ func (h *WebHandler) bookings(w http.ResponseWriter, r *http.Request) {
 		}
 		b, _ := h.assets.Bytes(filename[1:])
 		w.Write(b)
+		h.log.WithField("uri", filename).Print("GET")
 		return
 	case "POST":
 		memdebug.Print(time.Now(), "Posting a booking")
@@ -74,8 +96,9 @@ func (h *WebHandler) bookings(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		ip := getIPAdress(r)
 		h.newBooking(Booking{
-			IP:        r.RemoteAddr,
+			IP:        ip,
 			Name:      r.FormValue("name"),
 			Bike:      r.FormValue("bike"),
 			Enquiry:   r.FormValue("enquiry"),

@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/sirupsen/logrus"
 	"net/url"
 	"strconv"
 	"time"
@@ -23,6 +24,17 @@ type Booking struct {
 }
 
 func (h *WebHandler) newBooking(booking Booking) {
+	h.log.WithFields(logrus.Fields{
+		"ip":      booking.IP,
+		"name":    booking.Name,
+		"bike":    booking.Bike,
+		"enq":     booking.Enquiry,
+		"email":   booking.Email,
+		"tel":     booking.Telephone,
+		"address": booking.Address,
+		"message": booking.Message,
+		"date":    booking.Date,
+	}).Print("NewBooking")
 
 	id := 0
 
