@@ -104,7 +104,7 @@ func (h *WebHandler) newBooking(booking Booking) int {
 <p><strong>Bike: </strong> %s </p> 
 <p><strong>Email Address: </strong> %s </p> 
 <p><strong>Home Address: </strong> %s
-<p><a href=\"http://maps.google.com/?q=%s\">Click for MAP</a>
+<p><a href="http://maps.google.com/?q=%s">Click for MAP</a>
 <p><strong>Telephone: </strong> %s </p> 
 <hr><p><strong>Message: </strong></p><p> %s </p> 
 <p><strong>Reference: #2019%04d</strong></p>
