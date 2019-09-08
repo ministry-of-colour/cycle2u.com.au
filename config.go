@@ -11,9 +11,11 @@ import (
 
 type configData struct {
 	Port    int
+	Address string
 	Name    string
 	Mail    mailConfig
 	Monitor monitorConfig
+	SMS     smsConfig
 }
 
 type mailConfig struct {
@@ -21,10 +23,21 @@ type mailConfig struct {
 	Username string
 	Password string
 	From     string
+	Email    string
+	CC       []string
+	BCC      []string
 }
 
 type monitorConfig struct {
 	Email string
+}
+
+type smsConfig struct {
+	API         string
+	Username    string
+	Password    string
+	Destination string
+	Source      string
 }
 
 var configDataData *configData
@@ -49,7 +62,7 @@ func readConfig(reason string, cfg *configData, log *logrus.Logger) error {
 	if err := viper.Unmarshal(&cfg); err != nil {
 		return err
 	}
-	return sendMail("Cycle2U Startup: "+cfg.Name, fmt.Sprintf(`
+	return monitorEmail("Cycle2U Startup: "+cfg.Name, fmt.Sprintf(`
 <h1>%s: %s</h1>
 <ul>
 	<li>Port: %d

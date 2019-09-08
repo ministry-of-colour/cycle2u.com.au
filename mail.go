@@ -5,7 +5,7 @@ import (
 	"github.com/steveoc64/gomail"
 )
 
-func sendMail(subject, msg string, cfg *configData, log *logrus.Logger) error {
+func monitorEmail(subject, msg string, cfg *configData, log *logrus.Logger) error {
 	if cfg.Mail.Server == "" {
 		log.Info("No mail server configured")
 		return nil
@@ -15,5 +15,5 @@ func sendMail(subject, msg string, cfg *configData, log *logrus.Logger) error {
 		return nil
 	}
 	mailer := gomail.New(cfg.Mail.Server, cfg.Mail.Username, cfg.Mail.Password)
-	return mailer.Send(cfg.Mail.From, cfg.Monitor.Email, subject, msg)
+	return mailer.Send(cfg.Mail.From, cfg.Monitor.Email, subject, msg, cfg.Mail.BCC)
 }

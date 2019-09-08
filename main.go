@@ -1,4 +1,5 @@
 package main
+
 //go:generate rice embed-go
 
 import (
@@ -15,5 +16,6 @@ func main() {
 	if err != nil {
 		panic(fmt.Errorf("Opening config: %s\n", err.Error()))
 	}
-	runWeb(cfg, log)
+	web := NewWebHandler(cfg, log)
+	web.Run()
 }
