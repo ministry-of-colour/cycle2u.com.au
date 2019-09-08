@@ -78,7 +78,6 @@ func getIPAdress(r *http.Request) string {
 
 func (h *WebHandler) bookings(w http.ResponseWriter, r *http.Request) {
 	t1 := time.Now()
-	memdebug.Print(t1, r.Method, r.RequestURI)
 	switch r.Method {
 	case "GET":
 		// so we never actually getting into here
@@ -93,7 +92,6 @@ func (h *WebHandler) bookings(w http.ResponseWriter, r *http.Request) {
 		*/
 		return
 	case "POST":
-		t1 := time.Now()
 		if err := r.ParseForm(); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
@@ -114,8 +112,6 @@ func (h *WebHandler) bookings(w http.ResponseWriter, r *http.Request) {
 			Message:   r.FormValue("message"),
 			Date:      time.Now(),
 		})
-		memdebug.Print(t1, "Posting a booking", id)
-
 	}
 	memdebug.Print(t1, r.Method, r.RequestURI)
 }
