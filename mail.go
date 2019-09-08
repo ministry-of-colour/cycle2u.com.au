@@ -15,5 +15,5 @@ func monitorEmail(subject, msg string, cfg *configData, log *logrus.Logger) erro
 		return nil
 	}
 	mailer := gomail.New(cfg.Mail.Server, cfg.Mail.Username, cfg.Mail.Password)
-	return mailer.Send(cfg.Mail.From, cfg.Monitor.Email, subject, msg, cfg.Mail.BCC)
+	return mailer.Send(cfg.Mail.From, cfg.Monitor.Email, subject, msg, nil)
 }
