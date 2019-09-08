@@ -51,7 +51,7 @@ func (h *WebHandler) newBooking(booking Booking) {
 
 	// Generate an email to the person that placed the booking
 	userMail := fmt.Sprintf(`
-<div style="background:#90a1cf;height=100px;border-bottom:20px solid #32439d">
+<div style="background:#90a1cf;border-bottom:20px solid #32439d">
 <img src="http://cycle2u.com.au/images/logo.jpg">
 </div>
 <h3>Thanks for your Enquiry (%s)</h3>
