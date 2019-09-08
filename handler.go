@@ -93,14 +93,17 @@ func (h *WebHandler) bookings(w http.ResponseWriter, r *http.Request) {
 		*/
 		return
 	case "POST":
-		memdebug.Print(time.Now(), "Posting a booking")
+		t1 := time.Now()
 		if err := r.ParseForm(); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
+		// immediate feedback on the booking form
+		b, _ := h.assets.Bytes("thanks.html")
+		w.Write(b)
 
 		ip := getIPAdress(r)
-		h.newBooking(Booking{
+		id := h.newBooking(Booking{
 			IP:        ip,
 			Name:      r.FormValue("name"),
 			Bike:      r.FormValue("bike"),
@@ -111,9 +114,8 @@ func (h *WebHandler) bookings(w http.ResponseWriter, r *http.Request) {
 			Message:   r.FormValue("message"),
 			Date:      time.Now(),
 		})
+		memdebug.Print(t1, "Posting a booking", id)
 
-		b, _ := h.assets.Bytes("thanks.html")
-		w.Write(b)
 	}
 	memdebug.Print(t1, r.Method, r.RequestURI)
 }

@@ -24,7 +24,7 @@ type Booking struct {
 	Date      time.Time
 }
 
-func (h *WebHandler) newBooking(booking Booking) {
+func (h *WebHandler) newBooking(booking Booking) int {
 	h.log.WithFields(logrus.Fields{
 		"ip":      booking.IP,
 		"name":    booking.Name,
@@ -154,4 +154,5 @@ func (h *WebHandler) newBooking(booking Booking) {
 		h.log.WithError(err).Error("Sending SMS")
 	}
 	h.log.WithField("smsref", rsp).Info("SMS Response")
+	return id
 }
